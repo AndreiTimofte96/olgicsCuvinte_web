@@ -59,13 +59,10 @@ $(document).ready(function(){
     
 
     $(".insert .button").on("click", function(){
-        const letters = $(".insert #letters_input").val().toLowerCase();
+        const letters = $(".insert #letters_input").val().toLowerCase().replace(/ /g,'');
         const lengthInput = $(".insert #length_input").val();
         const regex = /^[a-zA-Z]+$/;
         const regex2 = /^\d+$/;
-
-
-
 
         if (regex.test(letters) === false || regex2.test(lengthInput) === false){
             
@@ -96,13 +93,21 @@ $(document).ready(function(){
 
     $('html').bind('keypress', function(e){
         if(e.keyCode == 13){
-            const letters = $(".insert #letters_input").val();
+            const letters = $(".insert #letters_input").val().toLowerCase().replace(/ /g,'');
+            const lengthInput = $(".insert #length_input").val();
             const regex = /^[a-zA-Z]+$/;
-            if (regex.test(letters) === false) {
-                $("span.warning").show();
+            const regex2 = /^\d+$/;
+
+            if (regex.test(letters) === false || regex2.test(lengthInput) === false){
+                
+                if (lengthInput.length !== 0 || regex.test(letters) === false ){
+                    $("span.warning").show();
+                }else{
+                    getWords(letters, lengthInput);
+                }
             }
             else{
-                getWords(letters);
+                getWords(letters, lengthInput);
             }
         }
    });
