@@ -7,6 +7,7 @@ $(document).ready(function(){
     
     $("span.warning").hide();
     $(".words").hide();
+    $(".pre-loader").hide();
 
     function apiWordsGet(letters, lengthInput, callback) {
 
@@ -19,8 +20,10 @@ $(document).ready(function(){
             apiURL+=`?letters=${letters}`;
         }
 
+        $(".pre-loader").show();
 		$.get(apiURL)
 		.done(function (response) {
+            $(".pre-loader").hide();
             callback(response);
         });      	
 	};
