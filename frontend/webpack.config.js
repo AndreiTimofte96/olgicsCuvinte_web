@@ -64,7 +64,7 @@ module.exports = {
           loader: 'less-loader' // compiles Less to CSS
         }]
       },
-      { test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/, loader: 'url-loader?limit=100000' }
+      { test: /\.(png|woff|woff2|eot|ttf|svg|gif|jpg)$/, loader: 'url-loader?limit=100000' }
     ]
   },
   plugins: [

@@ -3,18 +3,20 @@ $(document).ready(function(){
     require('../less/index.less');
 
     // const hostName = 'apiolgicscuvinte.localtunnel.me';
-    const hostName ='0.0.0.0:2225';
+    const hostName ='0.0.0.0:4000';
 
     $("span.warning").hide();
     $(".words").hide();
     $(".pre-loader").hide();
+
+    let language = 'romanian';
 
     function apiWordsGet(letters, lengthInput, callback) {
 
         let apiURL= `http://${hostName}/getWords`;
 
         if (lengthInput.length > 0){
-            apiURL+=`?letters=${letters}&length=${lengthInput}`;
+            apiURL+=`?letters=${letters}&length=${lengthInput}&language=${language}`;
             
         }else{
             apiURL+=`?letters=${letters}`;
@@ -53,7 +55,7 @@ $(document).ready(function(){
                     
                         let numberOf = response.solution[index].words.length;
                         toAppend+= '<div class="length">';
-                        toAppend+=`Length: ${index}. Number of words: ${numberOf}.`;
+                        toAppend+=`Length: <span>${index}</span>. Number of words: <span>${numberOf}</span>.`;
                         toAppend+=`<ul>`
                         
                             for (let jindex = 0; jindex < numberOf; jindex++){
@@ -101,7 +103,18 @@ $(document).ready(function(){
         $(".words").hide();
     });
 
+    $(".flag").on("click", function(){
+        language = $(this).attr("id");
 
+        if (language === 'romanian'){
+            $(`.flag#english`).removeClass('active');
+            $(`.flag#romanian`).addClass('active');
+        }
+        else{
+            $(`.flag#romanian`).removeClass('active');
+            $(`.flag#english`).addClass('active');
+        }
+    })
     $('html').bind('keypress', function(e){
         if(e.keyCode == 13){
             const letters = $(".insert #letters_input").val().toLowerCase().replace(/ /g,'');
@@ -122,5 +135,7 @@ $(document).ready(function(){
             }
         }
    });
+
+
 
 });
