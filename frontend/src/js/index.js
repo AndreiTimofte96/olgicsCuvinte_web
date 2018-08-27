@@ -2,16 +2,16 @@ $(document).ready(function(){
 
     require('../less/index.less');
 
-    const hostName = 'apiolgicscuvinte.localtunnel.me';
+    // const hostName = 'apiolgicscuvinte.localtunnel.me';
+    const hostName ='0.0.0.0:2225';
 
-    
     $("span.warning").hide();
     $(".words").hide();
     $(".pre-loader").hide();
 
     function apiWordsGet(letters, lengthInput, callback) {
 
-        let apiURL= `https://${hostName}/getWords`;
+        let apiURL= `http://${hostName}/getWords`;
 
         if (lengthInput.length > 0){
             apiURL+=`?letters=${letters}&length=${lengthInput}`;
