@@ -5,9 +5,9 @@ module.exports = (() => {
   
     const algorithmRoutes = (req, res)=>{
 
-        const {letters, length} =  req.query;
+        const {letters, length, language} =  req.query;
 
-        const solution = solve(letters, length);
+        const solution = solve(letters, length, language);
 
         solution.map( sol =>{sol.words.sort(function(a, b){
                 return a.localeCompare(b);
@@ -15,7 +15,7 @@ module.exports = (() => {
         });
         res.json({solution});
     };
-    
+
     return {
         algorithmRoutes
     };

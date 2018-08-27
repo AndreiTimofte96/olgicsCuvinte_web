@@ -1,10 +1,16 @@
 module.exports = (() => {
     'use strict';
 
-    const words = require('./words');
+    let words = [];
 
-    const solve = (letters, length) => {
+    const solve = (letters, length, language) => {
         
+        switch (language){
+            case 'romanian': { words = require('./wordsRomanian'); break; }
+            case 'english': { words = require('./wordsEnglish'); break; }
+            default: words = require('./wordsRomanian');
+        }
+
         let used = [];
         let usedWords = [];
         let sum = 0;
@@ -13,7 +19,8 @@ module.exports = (() => {
         console.log(length);
 
         for (let index = 0; index < words.length; index++){
-            
+
+
             if (letters.indexOf(words[index][0]) !== -1 ){ // eficientizare
                 
                 if (words[index].length == length || length == undefined){ //pt lungime variabila primita
