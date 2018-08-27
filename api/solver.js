@@ -39,8 +39,14 @@ module.exports = (() => {
                     if (words[index].length === sum){
 
                         if (solution.find((w)=>{return (w === words[index])}) === undefined){
+                            
+                            let foundWord = words[index];
+                            let lengthOfWord = foundWord.length;
 
-                            solution.push(words[index]);
+                            if (solution[lengthOfWord] == undefined){
+                                solution[lengthOfWord] = { "words": [] };
+                            }
+                            solution[lengthOfWord]["words"].push(foundWord);
                         }
                     }
                 }

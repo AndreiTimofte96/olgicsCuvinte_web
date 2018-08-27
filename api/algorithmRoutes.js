@@ -7,17 +7,15 @@ module.exports = (() => {
 
         const {letters, length} =  req.query;
 
-        const words = solve(letters, length);
+        const solution = solve(letters, length);
 
-        words.sort(function(a, b){
-            return a.length - b.length;
+        solution.map( sol =>{sol.words.sort(function(a, b){
+                return a.localeCompare(b);
+            });
         });
-
-      
-
-        res.json({words});
+        res.json({solution});
     };
-  
+    
     return {
         algorithmRoutes
     };

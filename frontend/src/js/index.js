@@ -24,7 +24,9 @@ $(document).ready(function(){
 		$.get(apiURL)
 		.done(function (response) {
             $(".pre-loader").hide();
+            console.log(response);
             callback(response);
+
         });      	
 	};
 
