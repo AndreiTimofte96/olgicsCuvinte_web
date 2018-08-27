@@ -24,7 +24,6 @@ $(document).ready(function(){
 		$.get(apiURL)
 		.done(function (response) {
             $(".pre-loader").hide();
-            console.log(response);
             callback(response);
 
         });      	
@@ -39,23 +38,30 @@ $(document).ready(function(){
             $(".words").show();
             let toAppend = "";
 
-            if (response.words.length === 0){
+
+            console.log(response);
+            if (response.solution.length === 0){
                 toAppend+= '<div class="length">';
                 toAppend+=`Nothing found!`;
                 toAppend+=`</div>`;
             }else{
-                for (let index = 0; index < response.words.length;){
+                for (let index = 0; index < response.solution.length; index++){
 
-                    let length = response.words[index].length;
-                    toAppend+= '<div class="length">';
-                    toAppend+=`Length ${length}`;
-                    toAppend+=`<ul>`
-                    while (index < response.words.length && response.words[index].length === length){
+                    console.log(response.solution[index]);
+
+                    if (response.solution[index] !== null){
+                    
+                        let numberOf = response.solution[index].words.length;
+                        toAppend+= '<div class="length">';
+                        toAppend+=`Length: ${index}. Number of words: ${numberOf}.`;
+                        toAppend+=`<ul>`
                         
-                        toAppend+=`<li>${response.words[index]}</li>`
-                        index++;
+                            for (let jindex = 0; jindex < numberOf; jindex++){
+                                toAppend+=`<li>${response.solution[index].words[jindex]}</li>`
+                            }
+
+                        toAppend+=`</ul> </div>`
                     }
-                    toAppend+=`</ul> </div>`
                 }
             }
              $(".words").append(toAppend);

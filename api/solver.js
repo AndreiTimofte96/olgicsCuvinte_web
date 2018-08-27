@@ -38,16 +38,23 @@ module.exports = (() => {
 
                     if (words[index].length === sum){
 
-                        if (solution.find((w)=>{return (w === words[index])}) === undefined){
-                            
-                            let foundWord = words[index];
-                            let lengthOfWord = foundWord.length;
+                        let foundWord = words[index];
+                        let lengthOfWord = foundWord.length;
 
-                            if (solution[lengthOfWord] == undefined){
-                                solution[lengthOfWord] = { "words": [] };
-                            }
-                            solution[lengthOfWord]["words"].push(foundWord);
+                        let wordExists = undefined;
+
+                        if (solution[lengthOfWord] !== undefined){
+                            wordExists = solution[lengthOfWord].words.find((w)=>{
+                                            return (w === words[index])
+                                        });
+                        }    
+                        else{
+                            solution[lengthOfWord] = { "words": [] };
                         }
+
+                        if (wordExists === undefined){ 
+                            solution[lengthOfWord]["words"].push(foundWord);
+                         }
                     }
                 }
             }
